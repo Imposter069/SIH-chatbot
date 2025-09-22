@@ -1,0 +1,23 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - ask_coffee
+  - affirm
+  - deny
+
+responses:
+  utter_greet:
+    - text: "Hello! Welcome to WebCafe ☕. How can I help you today?"
+  utter_goodbye:
+    - text: "Goodbye! Have a great day!"
+  utter_ask_coffee:
+    - text: "We have espresso, cappuccino, latte, and more. What would you like?"
+  utter_affirm:
+    - text: "Great!"
+  utter_deny:
+    - text: "No problem!"
+
+actions:
+  - action_serve_coffee

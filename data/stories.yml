@@ -1,0 +1,9 @@
+version: "3.1"
+
+stories:
+- story: greet and ask coffee
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_coffee
+    - action: utter_ask_coffee
