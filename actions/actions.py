@@ -293,3 +293,138 @@ class ActionProvidePrecaution(Action):
 
         dispatcher.utter_message(text=response)
         return []
+
+# ───── Add new class for Symptoms here ─────
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+
+class ActionProvideSymptoms(Action):
+
+    def name(self):
+        return "action_provide_symptoms"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: dict):
+
+        disease = next(tracker.get_latest_entity_values("disease"), None)
+
+        if not disease:
+            dispatcher.utter_message(response="utter_ask_disease")
+            return []
+
+        # Symptoms data
+        symptoms = {
+            "malaria": {
+                "en": "Malaria Symptoms:\n1. Fever 🌡️\n2. Chills ❄️\n3. Headache 🤕\n4. Nausea 🤢",
+                "hi": "मलेरिया लक्षण:\n1. बुखार 🌡️\n2. ठंड लगना ❄️\n3. सिरदर्द 🤕\n4. मतली 🤢"
+            },
+            "diabetes": {
+                "en": "Diabetes Symptoms:\n1. Frequent urination 🚽\n2. Increased thirst 💧\n3. Fatigue 😴\n4. Blurred vision 👀",
+                "hi": "डायबिटीज़ लक्षण:\n1. बार-बार पेशाब 🚽\n2. अधिक प्यास 💧\n3. थकान 😴\n4. धुंधली दृष्टि 👀"
+            },
+            "asthma": {
+                "en": "Asthma Symptoms:\n1. Shortness of breath 😮‍💨\n2. Wheezing 🎵\n3. Chest tightness 💢\n4. Coughing 🤧",
+                "hi": "अस्थमा लक्षण:\n1. सांस लेने में कठिनाई 😮‍💨\n2. घरघराहट 🎵\n3. सीने में दबाव 💢\n4. खाँसी 🤧"
+            },
+            "typhoid": {
+                "en": "Typhoid Symptoms:\n1. High fever 🌡️\n2. Weakness 😓\n3. Stomach pain 🤕\n4. Loss of appetite 🍽️",
+                "hi": "टाइफाइड लक्षण:\n1. तेज बुखार 🌡️\n2. कमजोरी 😓\n3. पेट में दर्द 🤕\n4. भूख कम होना 🍽️"
+            },
+                "hepatitis": {
+        "en": "Hepatitis Symptoms:\n1. Fatigue 😴\n2. Jaundice 👀\n3. Abdominal pain 🤕\n4. Dark urine 🧴",
+        "hi": "हेपेटाइटिस लक्षण:\n1. थकान 😴\n2. पीलिया 👀\n3. पेट दर्द 🤕\n4. गाढ़ा मूत्र 🧴"
+    },
+    "anemia": {
+        "en": "Anemia Symptoms:\n1. Fatigue 😴\n2. Pale skin 🧑🏻\n3. Dizziness 😵\n4. Shortness of breath 😮‍💨",
+        "hi": "एनीमिया लक्षण:\n1. थकान 😴\n2. पीली त्वचा 🧑🏻\n3. चक्कर आना 😵\n4. सांस फूलना 😮‍💨"
+    },
+    "migraine": {
+        "en": "Migraine Symptoms:\n1. Severe headache 🤕\n2. Nausea 🤢\n3. Sensitivity to light 💡\n4. Sensitivity to sound 🔊",
+        "hi": "माइग्रेन लक्षण:\n1. तेज सिरदर्द 🤕\n2. मतली 🤢\n3. रोशनी से परेशानी 💡\n4. आवाज़ से परेशानी 🔊"
+    },
+    "chickenpox": {
+        "en": "Chickenpox Symptoms:\n1. Itchy rash 🤒\n2. Fever 🌡\n3. Fatigue 😴\n4. Loss of appetite 🍽",
+        "hi": "चेचक लक्षण:\n1. खुजली वाला दाने 🤒\n2. बुखार 🌡\n3. थकान 😴\n4. भूख कम लगना 🍽"
+    },
+    "arthritis": {
+        "en": "Arthritis Symptoms:\n1. Joint pain 💢\n2. Stiffness 🦴\n3. Swelling 💧\n4. Reduced movement 🚶",
+        "hi": "गठिया लक्षण:\n1. जोड़ों में दर्द 💢\n2. जकड़न 🦴\n3. सूजन 💧\n4. चलने-फिरने में कठिनाई 🚶"
+    },
+    "kidney stone": {
+        "en": "Kidney Stone Symptoms:\n1. Severe back/side pain 🤕\n2. Painful urination 🚽\n3. Blood in urine 🧴\n4. Nausea 🤢",
+        "hi": "किडनी स्टोन लक्षण:\n1. पीठ/पक्ष में तेज दर्द 🤕\n2. पेशाब में दर्द 🚽\n3. मूत्र में खून 🧴\n4. मतली 🤢"
+    },
+    "cancer": {
+        "en": "Cancer Symptoms:\n1. Unexplained weight loss ⚖\n2. Fatigue 😴\n3. Persistent pain 🤕\n4. Lumps/swelling 🎯",
+        "hi": "कैंसर लक्षण:\n1. बिना कारण वजन घटना ⚖\n2. थकान 😴\n3. लगातार दर्द 🤕\n4. गांठ/सूजन 🎯"
+    },
+    "obesity": {
+        "en": "Obesity Symptoms:\n1. Excess body fat ⚖\n2. Breathlessness 😮‍💨\n3. Joint pain 💢\n4. Fatigue 😴",
+        "hi": "मोटापा लक्षण:\n1. अधिक शरीर की चर्बी ⚖\n2. सांस फूलना 😮‍💨\n3. जोड़ों में दर्द 💢\n4. थकान 😴"
+    },
+    "flu": {
+        "en": "Flu Symptoms:\n1. Fever 🌡\n2. Cough 🤧\n3. Sore throat 😷\n4. Body aches 💢",
+        "hi": "फ्लू लक्षण:\n1. बुखार 🌡\n2. खाँसी 🤧\n3. गले में खराश 😷\n4. शरीर में दर्द 💢"
+    },
+    "allergy": {
+        "en": "Allergy Symptoms:\n1. Sneezing 🤧\n2. Runny nose 👃\n3. Itchy eyes 👀\n4. Skin rash 🤒",
+        "hi": "एलर्जी लक्षण:\n1. छींक आना 🤧\n2. बहती नाक 👃\n3. आँखों में खुजली 👀\n4. त्वचा पर चकत्ते 🤒"
+    },
+    "thyroid": {
+        "en": "Thyroid Symptoms:\n1. Fatigue 😴\n2. Weight changes ⚖\n3. Swelling in neck 👤\n4. Mood swings 🙂😡",
+        "hi": "थायरॉयड लक्षण:\n1. थकान 😴\n2. वजन में बदलाव ⚖\n3. गर्दन में सूजन 👤\n4. मूड बदलना 🙂😡"
+    },
+    "epilepsy": {
+        "en": "Epilepsy Symptoms:\n1. Seizures ⚡\n2. Confusion 😵\n3. Loss of consciousness 😴\n4. Staring spells 👀",
+        "hi": "मिर्गी लक्षण:\n1. दौरे ⚡\n2. भ्रम 😵\n3. होश खोना 😴\n4. घूरना 👀"
+    },
+    "heart disease": {
+        "en": "Heart Disease Symptoms:\n1. Chest pain 💔\n2. Shortness of breath 😮‍💨\n3. Swelling in legs/feet 🦶\n4. Fatigue 😴",
+        "hi": "हृदय रोग लक्षण:\n1. सीने में दर्द 💔\n2. सांस फूलना 😮‍💨\n3. पैरों में सूजन 🦶\n4. थकान 😴"
+    },
+    "malnutrition": {
+        "en": "Malnutrition Symptoms:\n1. Weight loss ⚖\n2. Weakness 😓\n3. Dry skin/hair 💇\n4. Slow growth 📉",
+        "hi": "कुपोषण लक्षण:\n1. वजन घटना ⚖\n2. कमजोरी 😓\n3. रूखी त्वचा/बाल 💇\n4. धीमी वृद्धि 📉"
+    },
+    "polio": {
+        "en": "Polio Symptoms:\n1. Fever 🌡\n2. Weakness 😓\n3. Muscle pain 💢\n4. Paralysis 🦽",
+        "hi": "पोलियो लक्षण:\n1. बुखार 🌡\n2. कमजोरी 😓\n3. मांसपेशियों में दर्द 💢\n4. लकवा 🦽"
+    },
+    "swine flu": {
+        "en": "Swine Flu Symptoms:\n1. Fever 🌡\n2. Cough 🤧\n3. Sore throat 😷\n4. Body pain 💢",
+        "hi": "स्वाइन फ्लू लक्षण:\n1. बुखार 🌡\n2. खाँसी 🤧\n3. गले में खराश 😷\n4. शरीर में दर्द 💢"
+    },
+    "depression": {
+        "en": "Depression Symptoms:\n1. Persistent sadness 😢\n2. Loss of interest 🎭\n3. Fatigue 😴\n4. Sleep problems 🛌",
+        "hi": "डिप्रेशन लक्षण:\n1. लगातार उदासी 😢\n2. रुचि की कमी 🎭\n3. थकान 😴\n4. नींद की समस्या 🛌"
+    },
+    "gastritis": {
+        "en": "Gastritis Symptoms:\n1. Stomach pain 🤕\n2. Nausea 🤢\n3. Bloating 🎈\n4. Vomiting 🤮",
+        "hi": "गैस्ट्राइटिस लक्षण:\n1. पेट दर्द 🤕\n2. मतली 🤢\n3. पेट फूलना 🎈\n4. उल्टी 🤮"
+    },
+    "ulcer": {
+        "en": "Ulcer Symptoms:\n1. Burning stomach pain 🔥\n2. Bloating 🎈\n3. Heartburn 💔\n4. Nausea 🤢",
+        "hi": "अल्सर लक्षण:\n1. पेट में जलन 🔥\n2. पेट फूलना 🎈\n3. सीने में जलन 💔\n4. मतली 🤢"
+    },
+    "skin infection": {
+        "en": "Skin Infection Symptoms:\n1. Redness 🔴\n2. Swelling 💧\n3. Itching 🤕\n4. Pus discharge 💦",
+        "hi": "त्वचा संक्रमण लक्षण:\n1. लालिमा 🔴\n2. सूजन 💧\n3. खुजली 🤕\n4. पस निकलना 💦"
+    },
+    "eye flu": {
+        "en": "Eye Flu Symptoms:\n1. Red eyes 👀\n2. Watering 💧\n3. Itching 🤕\n4. Blurred vision 👓",
+        "hi": "आंखों का फ्लू लक्षण:\n1. लाल आँखें 👀\n2. पानी आना 💧\n3. खुजली 🤕\n4. धुंधली दृष्टि 👓"
+    }
+
+        }
+
+        # Detect language automatically
+        lang = "hi" if any('\u0900' <= c <= '\u097F' for c in disease) else "en"
+        response = symptoms.get(disease, {}).get(lang, "I don't have symptom data for this disease yet.")
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+
