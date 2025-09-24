@@ -1,37 +1,24 @@
 version: "3.1"
 
 nlu:
+- intent: ask_precaution
+  examples: |
+    - What are the precautions for [malaria](disease)?
+    - Tell me precautions for [diabetes](disease)
+    - How to prevent [malaria](disease)?
+    - Give me advice for [diabetes](disease)
+    - [malaria](disease)
+    - [diabetes](disease)
+    - [मलेरिया](disease) से कैसे बचें?
+    - [डायबिटीज़](disease) के लिए सावधानियां क्या हैं
+    - मुझे [मलेरिया](disease) से बचाव बताएं
+    - [मलेरिया](disease)
+    - [डायबिटीज़](disease)
+
 - intent: greet
   examples: |
-    - hi
-    - hello
-    - hey
-    - good morning
-    - good evening
-
-- intent: goodbye
-  examples: |
-    - bye
-    - goodbye
-    - see you later
-    - see you
-
-- intent: ask_coffee
-  examples: |
-    - What coffees do you have?
-    - Can I get a latte?
-    - I want a cappuccino
-    - Show me the menu
-
-- intent: affirm
-  examples: |
-    - yes
-    - yeah
-    - sure
-    - absolutely
-
-- intent: deny
-  examples: |
-    - no
-    - nope
-    - not really
+    - Hi
+    - Hello
+    - Hey
+    - नमस्ते
+    - हाय
