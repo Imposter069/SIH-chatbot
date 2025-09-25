@@ -72,6 +72,133 @@ nlu:
     - [त्वचा संक्रमण](disease)
     - [आँख का फ्लू](disease)
 
+- intent: provide_symptoms
+  examples: |
+    # Malaria
+    - I have [fever](symptom) and [chills](symptom)
+    - Experiencing [headache](symptom) and [nausea](symptom)
+    - मुझे [बुखार](symptom) और [ठंड लगना](symptom) हो रहा है
+
+    # Diabetes
+    - I have [frequent urination](symptom) and [increased thirst](symptom)
+    - Feeling [fatigue](symptom) and [blurred vision](symptom)
+    - मुझे [थकान](symptom) और [धुंधली दृष्टि](symptom) हो रही है
+
+    # Asthma
+    - I have [shortness of breath](symptom) and [wheezing](symptom)
+    - Experiencing [chest tightness](symptom) and [coughing](symptom)
+    - मुझे [सांस लेने में कठिनाई](symptom) और [खाँसी](symptom) हो रही है
+
+    # Typhoid
+    - I have [high fever](symptom) and [stomach pain](symptom)
+    - Feeling [weakness](symptom) and [loss of appetite](symptom)
+    - मुझे [पेट में दर्द](symptom) और [कमजोरी](symptom) हो रही है
+
+    # Hepatitis
+    - I have [fatigue](symptom) and [jaundice](symptom)
+    - Experiencing [abdominal pain](symptom) and [dark urine](symptom)
+    - मुझे [थकान](symptom) और [पीलिया](symptom) हो रहा है
+
+    # Anemia
+    - I have [fatigue](symptom) and [pale skin](symptom)
+    - Experiencing [dizziness](symptom) and [shortness of breath](symptom)
+    - मुझे [थकान](symptom) और [सांस फूलना](symptom) हो रहा है
+
+    # Migraine
+    - I have [severe headache](symptom) and [nausea](symptom)
+    - Experiencing [sensitivity to light](symptom) and [sensitivity to sound](symptom)
+    - मुझे [तेज सिरदर्द](symptom) और [मतली](symptom) हो रही है
+
+    # Chickenpox
+    - I have [itchy rash](symptom) and [fever](symptom)
+    - Experiencing [fatigue](symptom) and [loss of appetite](symptom)
+    - मुझे [खुजली वाला दाने](symptom) और [बुखार](symptom) हो रहा है
+
+    # Arthritis
+    - I have [joint pain](symptom) and [stiffness](symptom)
+    - Experiencing [swelling](symptom) and [reduced movement](symptom)
+    - मुझे [जोड़ों में दर्द](symptom) और [जकड़न](symptom) हो रही है
+
+    # Kidney Stone
+    - I have [severe back pain](symptom) and [painful urination](symptom)
+    - Experiencing [blood in urine](symptom) and [nausea](symptom)
+    - मुझे [पीठ में तेज दर्द](symptom) और [पेशाब में दर्द](symptom) हो रहा है
+
+    # Cancer
+    - I have [unexplained weight loss](symptom) and [fatigue](symptom)
+    - Experiencing [persistent pain](symptom) and [lumps](symptom)
+    - मुझे [वजन घटना](symptom) और [थकान](symptom) हो रही है
+
+    # Obesity
+    - I have [excess body fat](symptom) and [breathlessness](symptom)
+    - Experiencing [joint pain](symptom) and [fatigue](symptom)
+    - मुझे [अधिक शरीर की चर्बी](symptom) और [सांस फूलना](symptom) हो रहा है
+
+    # Flu
+    - I have [fever](symptom) and [cough](symptom)
+    - Experiencing [sore throat](symptom) and [body aches](symptom)
+    - मुझे [बुखार](symptom) और [खाँसी](symptom) हो रही है
+
+    # Allergy
+    - I have [sneezing](symptom) and [runny nose](symptom)
+    - Experiencing [itchy eyes](symptom) and [skin rash](symptom)
+    - मुझे [छींक](symptom) और [बहरी नाक](symptom) हो रही है
+
+    # Thyroid
+    - I have [fatigue](symptom) and [weight changes](symptom)
+    - Experiencing [swelling in neck](symptom) and [mood swings](symptom)
+    - मुझे [थकान](symptom) और [वजन में बदलाव](symptom) हो रहा है
+
+    # Epilepsy
+    - I have [seizures](symptom) and [confusion](symptom)
+    - Experiencing [loss of consciousness](symptom) and [staring spells](symptom)
+    - मुझे [दौरे](symptom) और [भ्रम](symptom) हो रहे हैं
+
+    # Heart Disease
+    - I have [chest pain](symptom) and [shortness of breath](symptom)
+    - Experiencing [swelling in legs](symptom) and [fatigue](symptom)
+    - मुझे [सीने में दर्द](symptom) और [सांस फूलना](symptom) हो रहा है
+
+    # Malnutrition
+    - I have [weight loss](symptom) and [weakness](symptom)
+    - Experiencing [dry skin](symptom) and [slow growth](symptom)
+    - मुझे [वजन घटना](symptom) और [कमजोरी](symptom) हो रही है
+
+    # Polio
+    - I have [fever](symptom) and [weakness](symptom)
+    - Experiencing [muscle pain](symptom) and [paralysis](symptom)
+    - मुझे [बुखार](symptom) और [मांसपेशियों में दर्द](symptom) हो रहा है
+
+    # Swine Flu
+    - I have [fever](symptom) and [cough](symptom)
+    - Experiencing [sore throat](symptom) and [body pain](symptom)
+    - मुझे [बुखार](symptom) और [खाँसी](symptom) हो रही है
+
+    # Depression
+    - I have [persistent sadness](symptom) and [loss of interest](symptom)
+    - Experiencing [fatigue](symptom) and [sleep problems](symptom)
+    - मुझे [लगातार उदासी](symptom) और [नींद की समस्या](symptom) हो रही है
+
+    # Gastritis
+    - I have [stomach pain](symptom) and [nausea](symptom)
+    - Experiencing [bloating](symptom) and [vomiting](symptom)
+    - मुझे [पेट दर्द](symptom) और [मतली](symptom) हो रही है
+
+    # Ulcer
+    - I have [burning stomach pain](symptom) and [heartburn](symptom)
+    - Experiencing [bloating](symptom) and [nausea](symptom)
+    - मुझे [पेट में जलन](symptom) और [सीने में जलन](symptom) हो रही है
+
+    # Skin Infection
+    - I have [redness](symptom) and [swelling](symptom)
+    - Experiencing [itching](symptom) and [pus discharge](symptom)
+    - मुझे [लालिमा](symptom) और [सूजन](symptom) हो रही है
+
+    # Eye Flu
+    - I have [red eyes](symptom) and [watering](symptom)
+    - Experiencing [itching](symptom) and [blurred vision](symptom)
+    - मुझे [लाल आँखें](symptom) और [पानी आना](symptom) हो रहा है
+
 - intent: greet
   examples: |
     - Hi
